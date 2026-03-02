@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Kelmy estudiosita <3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #ff758c;
+            --secondary: #ff7eb3;
+            --text-color: #444;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+        }
+
+        #startScreen {
+            z-index: 10;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.8s ease;
+        }
+
+        h2.title-init {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 15px 35px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 117, 140, 0.5);
+        }
+
+        .loader {
+            margin: 20px auto;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* La Carta Mejorada */
+        .paper {
+            position: relative;
+            background: #fffef9;
+            color: var(--text-color);
+            width: 90%;
+            max-width: 550px; /* Un poco más ancha para el texto largo */
+            max-height: 85vh; /* Evita que se salga de la pantalla */
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transform: translateY(50px);
+            opacity: 0;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .paper.show {
+            display: flex;
+            animation: fadeInUp 1.2s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .paper h2 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary);
+            font-size: 2.2rem;
+            text-align: center;
+            margin: 0 0 20px 0;
+        }
+
+        /* Contenedor de texto con scroll interno suave */
+        .content-scroll {
+            overflow-y: auto;
+            padding-right: 15px;
+            text-align: center;
+            scrollbar-width: thin;
+            scrollbar-color: var(--secondary) transparent;
+        }
+
+        /* Estilo para Chrome/Safari */
+        .content-scroll::-webkit-scrollbar { width: 5px; }
+        .content-scroll::-webkit-scrollbar-thumb { background-color: var(--secondary); border-radius: 10px; }
+
+        .content-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+            white-space: pre-wrap; /* Mantiene tus saltos de línea */
+        }
+
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp 6s linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        #scanText {
+            font-style: italic;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        /* ========================= */
+/* 📱 RESPONSIVE PARA CELULAR */
+/* ========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+        height: 100vh;
+        align-items: center;
+    }
+
+    #startScreen {
+        width: 100%;
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+
+    h2.title-init {
+        font-size: 1.4rem;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+
+    .paper {
+        width: 100%;
+        max-width: 100%;
+        max-height: 90vh;
+        padding: 25px 20px;
+        border-radius: 20px;
+    }
+
+    .paper h2 {
+        font-size: 1.8rem;
+    }
+
+    .content-text {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .content-scroll {
+        padding-right: 5px;
+    }
+}
+    </style>
+</head>
+<body>
+
+<div id="startScreen">
+    <h2 class="title-init">Sincronizando Corazones</h2>
+    <button onclick="startScan()">Descifrar mensaje secreto :3</button>
+    <p id="scanText"></p>
+    <div class="loader" id="loader"></div>
+</div>
+
+<div class="paper" id="letter">
+    <h2>Para Kelmy 💖</h2>
+    <div class="content-scroll">
+        <div class="content-text">
+Kelmy,
+
+Pronto comenzará tu semana de exámenes finales.
+Sé que no es algo sencillo, que habrá momentos de cansancio, presión y quizá un poco de nervios… pero quiero que recuerdes algo muy importante desde ahora: yo creo en ti.
+
+Creo en tu capacidad, en tu inteligencia y en todo el esfuerzo silencioso que has puesto para llegar hasta aquí.
+Confío en tu disciplina, en tu constancia y en esa fuerza que llevas dentro, incluso cuando tú misma dudas.
+
+Pero además de que yo crea en ti, quiero que tú también lo hagas.
+Quiero que cuando te mires al espejo veas a la mujer capaz que realmente eres.
+Que cuando aparezca una pregunta difícil, recuerdes que has superado cosas más grandes.
+Que confíes en tu preparación, en tu mente, en tu corazón.
+
+Porque el primer paso para lograrlo todo… es creer que puedes.
+
+Sé que lo vas a lograr.
+No porque sea fácil, sino porque eres fuerte. Porque no te rindes. Porque cuando decides avanzar, lo haces con todo el corazón.
+
+Y más allá de cualquier nota o resultado, ya estoy orgulloso de ti.
+Orgulloso de la mujer que eres, de tu perseverancia, de tu compromiso.
+Eres una mujer valiente, una guerrera hermosa que enfrenta los desafíos sin perder su esencia.
+
+Si el estrés, la duda o el miedo intentan aparecer en algún momento, respira profundo y recuerda que no estás sola.
+Dios está contigo en cada paso, guiándote y dándote la fortaleza que necesitas.
+
+Y yo… yo creo en ti más de lo que imaginas.
+Pero lo más importante es que tú también creas en ti. 
+Te quiero con locura, muak💖
+        </div>
+        <p style="text-align: center; font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: var(--primary); margin-top: 20px;">
+    Con amor, Santiago Orbe
+</p>
+        <div style="margin: 40px 0 20px;">
+            <button onclick="restart()" style="font-size: 13px; padding: 10px 25px;">Leer de nuevo 💗</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function startScan() {
+    const text = document.getElementById("scanText");
+    const loader = document.getElementById("loader");
+    const btn = document.querySelector("#startScreen button");
+
+    btn.style.display = "none";
+    text.innerHTML = "Validando identidad...";
+    loader.style.display = "block";
+    
+    setTimeout(() => { text.innerHTML = "Analizando brillo del alma..."; }, 1500);
+    setTimeout(() => { text.innerHTML = "Acceso concedido a: <b>Kelmy 🌻</b>"; }, 3000);
+
+    setTimeout(() => {
+        document.getElementById("startScreen").style.opacity = "0";
+        setTimeout(() => {
+            document.getElementById("startScreen").style.display = "none";
+            const letter = document.getElementById("letter");
+            letter.style.display = "flex";
+            setTimeout(() => letter.classList.add("show"), 10);
+            startHearts();
+        }, 800);
+    }, 5000);
+}
+
+function startHearts() {
+    const emojis = ["💖", "🌸", "✨", "💕", "🎀"];
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+        heart.style.opacity = Math.random();
+        heart.style.animationDuration = (Math.random() * 2 + 4) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => { heart.remove(); }, 6000);
+    }, 450);
+}
+
+function restart() {
+    location.reload();
+}
+</script>
+
+</body>
+</html>
